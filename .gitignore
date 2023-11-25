@@ -15,3 +15,6 @@ rel/example_project
 ebin
 logs
 grpc.d
+rebar3
+rebar.lock
+
