@@ -56,7 +56,13 @@ start(Name, Transport, Port, Services, Options) ->
                 #{auth_fun => AuthFun,
                   services => Services}}]}]),
     ProtocolOpts = #{env => #{dispatch => Dispatch},
-                     %% inactivity_timeout => infinity,
+                     inactivity_timeout => infinity,
+                     idle_timeout => infinity,
+                     preface_timeout => infinity,
+                     settings_timeout => infinity,
+                     shutdown_timeout => infinity,
+                     linger_timeout => infinity,
+                     request_timeout => infinity,
                      stream_handlers => [grpc_stream_handler,
                                          cowboy_stream_h],
                      middlewares => Middlewares},
@@ -111,7 +117,7 @@ make_stream(#{headers := Headers,
                 encoding => plain,
                 compression => none, %% compression of the response messages
                 start_time => erlang:system_time(1),
-                content_type => undefined,
+                content_type => <<"application/grpc">>,
                 user_agent => undefined,
                 timeout => infinity}, Headers).
 
